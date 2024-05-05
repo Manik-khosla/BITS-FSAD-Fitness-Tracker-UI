@@ -9,23 +9,22 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control form-control-lg" id="useremail"
-                        placeholder="name@example.com">
+                        placeholder="name@example.com" type="email" [(ngModel)]="userEmail"  required>
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">Password</label>
-                    <input class="form-control form-control-lg" id="password">
+                    <input class="form-control form-control-lg" type="password" id="password" [(ngModel)]="password" required>
                 </div>
                 <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-outline-primary"><span
-                            class="bi bi-box-arrow-in-right">&nbsp;&nbsp;</span>Login</button>
+                    <button class="btn btn-outline-primary" (click)="LoginUser(userEmail,password)">
+                        <span class="bi bi-box-arrow-in-right">&nbsp;&nbsp;</span>Login
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-1">
-        <div style="border-right: 30px; border-color: black; border-right-style:dashed; height:150px"></div>
-    </div>
+    <div class="col-lg-1"></div>
 
     <div class="col-lg-6 img-fluid">
         <img src="../../assets/Login/LoginPageScreen.png">

@@ -1,1 +1,89 @@
-<p>signup works!</p>
+<div style="margin-top:150px">
+    <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <form ngNativeValidate class="was-validated">
+                        
+                        <div class="row g-3">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="First name" id="firstName" name="firstName" [(ngModel)]="user.firstname" required> 
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name" id="lastName" name="lastName" [(ngModel)]="user.lastname" required>                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="UserEmail" name="email" aria-describedby="emailHelp"
+                                placeholder="Enter email" [(ngModel)]="user.email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="user.password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Age">Age</label>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Age" [(ngModel)]="user.age" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox" required>
+                                <label class="form-check-label" for="checkbox">
+                                    I agree with Terms of Service, Privacy Policy, and our default Notification Settings.
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" (click)="SignupUser(user)">Signup</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            
+            <div class="container-fluid py-5 bg-dark-subtle text-dark-emphasis" style="height: 100%;">
+                <h1 class="display-5 fw-bold">Signup Now and Avail all services for Free!!</h1>
+                
+                <div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Workout Plan</h5>
+                            <small><span></span></small>
+                          </div>
+                          <p class="mb-1">Create customized workout plans.</p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Goal Tracking</h5>
+                            <small class="text-body-secondary"></small>
+                          </div>
+                          <p class="mb-1">Set your goals and track easily</p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Nutrition Planning</h5>
+                          </div>
+                          <p class="mb-1">Get customized diet plans as per workout</p>
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
