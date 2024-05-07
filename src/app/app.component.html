@@ -12,13 +12,21 @@
       <div class="offcanvas-header"></div>
       <div class="offcanvas-body" role="navigation">
         <ul class="nav nav-pills nav-justified d-flex flex-lg-column">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isUserLoggedIn">
             <a class="nav-link active text-light my-3" aria-current="page" href="home">
               <span class="bi bi-house">&nbsp;&nbsp;</span>
               <span>Home</span>
             </a>
           </li>
-          <li class="nav-item dropdown my-3">
+          <li class="nav-item text-light btn btn-outline-primary my-3" *ngIf="isUserLoggedIn">
+          <div>Welcome {{LoggedInUserDetails.firstname}}</div>
+          </li>
+          <li class="nav-item" *ngIf="isUserLoggedIn">
+            <a>
+              <span class="nav-link text-light btn btn-outline-primary my-3" href="dashboard">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown my-3" *ngIf="!isUserLoggedIn">
             <a class="nav-link text-light dropdown-toggle btn btn-outline-secondary" href="#" id="navbarDropdown"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Features
@@ -35,12 +43,12 @@
               <li><a class="dropdown-item" href="Nutrition-Tracking">Nutrition Tracking</a></li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isUserLoggedIn">
             <a class="nav-link text-light my-3 btn btn-outline-secondary" href="#">
               <span>News & Forum</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isUserLoggedIn">
             <a class="nav-link text-light my-3 btn btn-outline-secondary" href="#">
               <span>Community</span>
             </a>
@@ -52,8 +60,9 @@
       </div>
       <div>
         <ul class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <li class="btn btn-outline-success btn-lg me-2" (click)="Login()">Login</li>
-          <li class="btn btn-outline-info btn-lg me-2" (click)="SignupNewUser()">Signup</li>
+          <li class="btn btn-outline-success btn-lg me-2" *ngIf="!isUserLoggedIn" (click)="Login()">Login</li>
+          <li class="btn btn-outline-info btn-lg me-2" *ngIf="!isUserLoggedIn" (click)="SignupNewUser()">Signup</li>
+          <li class="btn btn-outline-danger btn-lg" *ngIf="isUserLoggedIn" (click)="Logout()">Logout</li>
         </ul>
       </div>
     </div>

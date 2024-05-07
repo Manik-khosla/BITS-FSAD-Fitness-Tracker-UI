@@ -1,0 +1,28 @@
+<div style="margin-top:150px">
+    <div class="row container">
+        <div clas="col-lg-4 border-end border-5 border-primary">
+            <h4> Workout Editor</h4>
+
+          <div *ngFor="let i of weeks"> 
+            <div class="card w-30 border-dark border-3 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Week {{i}}</h5>
+                    <app-activity (click)="selectedWeek(i)"></app-activity>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div clas="col-lg-4 border-end border-5 border-primary">
+            <div>
+
+            </div>
+        </div>
+
+        <div clas="col-lg-4">
+
+        </div>
+
+    </div>
+</div>
