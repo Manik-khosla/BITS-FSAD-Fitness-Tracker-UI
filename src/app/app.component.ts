@@ -1,27 +1,33 @@
 import { Component } from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
-import { LoginService } from './login/login.service';
+import {Router, RouterOutlet, UrlSegment} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import { User } from './signup/user';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers:[LoginComponent]
 })
 export class AppComponent {
   title = 'Fitness-Tracker'; 
   isUserLoggedIn: boolean = false
-  LoggedInUserDetails!: User;
+  LoggedInUserDetails: User = new User;
 
   constructor(private router: Router, private loginService: LoginService) {
-    this.loginService.getLoginStatus().subscribe ( res => {
+    this.loginService.getLoginStatus().subscribe (res => {
     this.isUserLoggedIn = res;
     console.log("In App component set Property isUserLoggedIn " + this.isUserLoggedIn)
-    this.LoggedInUserDetails = loginService.getLoggedInUserDetails()
-     })  
+    loginService.getLoggedInUserDetails().subscribe (userInfo => {
+      this.LoggedInUserDetails.firstname = userInfo.user.first_name
+      this.router.navigate(['dashboard']); 
+    })
+  
+    })
 }
 
   Login() {

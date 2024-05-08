@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivityComponent } from '../activity/activity.component';
 
@@ -12,13 +12,21 @@ import { ActivityComponent } from '../activity/activity.component';
 export class DashboardComponent {
 
 weeks: number[] = [1,2,3,4];
+static selectedDay: number;
 
   @ViewChild(ActivityComponent)
-  private activityComponent!: ActivityComponent;
+  activityComponent!: ActivityComponent;
 
-   selectedWeek(week: number) {
+   setSelectedWeek(week: number) {
    this.activityComponent.setSelectedWeek(week)
+  }
 
+  setSelectedDay(day: number) {
+  DashboardComponent.selectedDay = day
+  }
+
+  getSelectedDay(){
+    return DashboardComponent.selectedDay
   }
 
 }

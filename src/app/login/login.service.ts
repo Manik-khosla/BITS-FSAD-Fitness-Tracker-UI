@@ -7,33 +7,33 @@ import { User } from '../signup/user';
   providedIn: 'root'
 })
 export class LoginService {
+  BaseURL = "http://localhost:3000/"
+  loginURL = this.BaseURL + "api/v1/sessions/sign_in"
+  GetUserDetailsURL = this.BaseURL + "api/v1/sessions/"
   isLoginSuccess$ = new BehaviorSubject<boolean>(false);
-  LoggedInUserDetails!: User;
+  access_token!: String; 
+  
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   loginUser(userEmail: string, password: string) {
-   var creds = {"userEmail": userEmail, "password": password}
-  // return this.http.post<User> (this.loginURL,creds, {responseType: 'json'}).subscribe(response =>
-  //  {
-  //  if(response) {
-  //   this.isLoginSuccess$.next(true);
-  //   console.log("User Login Success")
-  //   return {"id":1, "firstname":"Manik","age":27}
-  //  }
-  //  })
-  this.LoggedInUserDetails = {"id":1, "firstname":"Manik","age":27, "lastname":"khosla", "email":"manik6894", "password":""}
-  this.isLoginSuccess$.next(true);
-  console.log("User Login Success")
-    
-}
+    var creds = { "email": userEmail, "password": password }
+    return this.http.post<any>(this.loginURL, creds, { responseType: 'json', observe: 'body' })
+  }
+   
+  setAccessToken(token:String) {
+    this.access_token = token
+  }
 
-getLoginStatus() {
-  return this.isLoginSuccess$.asObservable();
-}
+  updateLoginStatus() {
+    this.isLoginSuccess$.next(true)
+  }
 
-getLoggedInUserDetails() {
-  return this.LoggedInUserDetails
-}
+  getLoginStatus() {
+    return this.isLoginSuccess$.asObservable();
+  }
 
+  getLoggedInUserDetails() {
+    return this.http.get<any>(this.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.access_token}, responseType: 'json', observe: 'body'})
+   }
 }

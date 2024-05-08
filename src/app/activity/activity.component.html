@@ -2,14 +2,26 @@
     <table class="table table-sm">
         <thead>
             <tr>
-                <th *ngFor="let day of numberOfDays" scope="col">Day {{day}}</th>
+                <th *ngFor="let day of numberOfDays">Day {{day}}</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <tr>
                 <td *ngFor="let day of numberOfDays">
-                    <span class="bi bi-plus-circle-fill btn text-primary" id="activityModalToggleBtn" (click)="setSelectedDay(day)"
-                    ></span>
+                    <span class="bi bi-plus-circle-fill btn text-primary" id="activityModalToggleBtn"
+                        (click)="setSelectedDay(day)"></span>
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let day of numberOfDays">
+                        <div *ngFor="let activity of activities">
+                            <div *ngIf="activity.ScheduleDay==day">
+                                <div class="alert alert-success" role="alert">
+                                    <div><b>Name</b> {{activity.Name}}</div>
+                                    <div><b>Duration</b> {{activity.Duration}} </div>
+                                </div>
+                            </div>                            
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -25,22 +37,26 @@
                 <div class="modal-body">
                     <div>
                         <form>
-                            <input class="form-control mb-3" type="text" placeholder="Week {{selectedWeek}}"  disabled>
+                            <input class="form-control mb-3" type="text" disabled
+                                placeholder="Week {{selectedWeek}} Day {{selectedDay}}">
                             <div class="row mb-3">
-                                <label for="activityName" class="col-sm-2 col-form-label">ActivityName</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="activityName" name="activityName"
+                                <label for="activityName" class="col-4 col-form-label">ActivityName</label>
+                                <div class="col-4"></div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="col-2 form-control" id="activityName" name="activityName"
                                         [(ngModel)]="activity.Name" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="duration" class="col-sm-2 col-form-label">Duration</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="duration"  name="duration"
+                                <label for="duration" class="col-md-4 col-form-label">Duration</label>
+                                <div class="col-4"></div>
+                                <div class="col-sm-4">
+                                    <input type="time" class="col-2 form-control" id="duration" name="duration"
                                         [(ngModel)]="activity.Duration" required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" click="createActivity(activity)">CreateActivity</button>
+                            <button type="submit" class="btn btn-primary"
+                                (click)="createActivity(activity)">CreateActivity</button>
                         </form>
                     </div>
                 </div>

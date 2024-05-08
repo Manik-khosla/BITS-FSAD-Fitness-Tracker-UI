@@ -3,5 +3,6 @@ export class Activity {
     Name!: string;
     Duration!: string;
     Status: string = "New";
-    createdAt!: Date;
+    ScheduleWeek!: number;
+    ScheduleDay!: number;
   }
