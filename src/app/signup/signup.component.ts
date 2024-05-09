@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { User } from './user';
 import { SignupService } from './signup.service';
 import { Router } from '@angular/router';
+import * as bootstrap from 'bootstrap'
+import { Observable, catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -15,9 +18,10 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   
   user: User;
-  signupService!: SignupService;
- 
-  constructor(user:User, signupService: SignupService, private router: Router) { 
+  ErrorMessage!: any;
+
+  
+  constructor(user:User, private signupService: SignupService, private router: Router) { 
   this.user = new User;
   }
 
@@ -31,13 +35,17 @@ export class SignupComponent {
    + "\nage=" + user.age)
    
    this.signupService.signupUser(this.user).subscribe( response => {
-    this.user.id = 1
-    this.user.firstname = "Manik";
     console.log("user signup completed successfully");
     this.router.navigate(['login']);
-   });
-   
+   },
+  errorResponse => {
+    for(var key in errorResponse.error.errors) {
+    if(errorResponse.error.errors[key]){
+    this.ErrorMessage = errorResponse.error.errors[key]
+    const myToast = bootstrap.Toast.getOrCreateInstance('#showErrorMsg') 
+    myToast.show()
+    }
   }
-
-
+  }
+  )}
 }

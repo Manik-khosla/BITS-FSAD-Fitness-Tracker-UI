@@ -1,15 +1,29 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './user';
+import { URLGenerator } from '../URLGenerator';
+import { catchError, throwError } from 'rxjs';
+import { LoginComponent } from '../login/login.component';
+import { SignupComponent } from './signup.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
-  signupURL ="api/signup/user"
+  errorMessage!: String; 
   constructor(private http: HttpClient) {}
 
   signupUser(user: User) {
-   return this.http.post<User> (this.signupURL, user, {responseType: 'json'});
+    var payload = {
+      "user" : {
+        "first_name": user.firstname,
+        "last_name": user.lastname,
+        "email": user.email,
+        "password": user.password,
+        "age":user.age
+      }
+    }
+   return this.http.post<any> (URLGenerator.SignupURL, payload, {responseType: 'json', observe : 'body'})
   }
+
 }

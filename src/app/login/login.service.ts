@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../signup/user';
+import { URLGenerator } from '../URLGenerator';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class LoginService {
 
   loginUser(userEmail: string, password: string) {
     var creds = { "email": userEmail, "password": password }
-    return this.http.post<any>(this.loginURL, creds, { responseType: 'json', observe: 'body' })
+    return this.http.post<any>(URLGenerator.LoginURL, creds, { responseType: 'json', observe: 'body' })
   }
    
   setAccessToken(token:String) {
@@ -34,6 +35,6 @@ export class LoginService {
   }
 
   getLoggedInUserDetails() {
-    return this.http.get<any>(this.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.access_token}, responseType: 'json', observe: 'body'})
+    return this.http.get<any>(URLGenerator.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.access_token}, responseType: 'json', observe: 'body'})
    }
 }

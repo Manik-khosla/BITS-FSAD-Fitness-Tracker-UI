@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {Router, RouterOutlet, UrlSegment} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import { User } from './signup/user';
-import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 
 @Component({
@@ -10,8 +9,7 @@ import { LoginService } from './login/login.service';
   standalone: true,
   imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  providers:[LoginComponent]
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Fitness-Tracker'; 
