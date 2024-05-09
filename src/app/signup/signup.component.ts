@@ -4,8 +4,7 @@ import { User } from './user';
 import { SignupService } from './signup.service';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap'
-import { Observable, catchError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-signup',
@@ -19,8 +18,8 @@ export class SignupComponent {
   
   user: User;
   ErrorMessage!: any;
+  SuccessMessage!: any;
 
-  
   constructor(user:User, private signupService: SignupService, private router: Router) { 
   this.user = new User;
   }
@@ -35,8 +34,10 @@ export class SignupComponent {
    + "\nage=" + user.age)
    
    this.signupService.signupUser(this.user).subscribe( response => {
-    console.log("user signup completed successfully");
+    LoginComponent.SuccessMessage = 'user signup completed successfully'
+    console.log(this.SuccessMessage);
     this.router.navigate(['login']);
+
    },
   errorResponse => {
     for(var key in errorResponse.error.errors) {
