@@ -62,7 +62,7 @@
         <ul class="d-grid gap-2 d-md-flex justify-content-md-end">
           <li class="btn btn-outline-success btn-lg me-2" *ngIf="!isUserLoggedIn" (click)="Login()">Login</li>
           <li class="btn btn-outline-info btn-lg me-2" *ngIf="!isUserLoggedIn" (click)="SignupNewUser()">Signup</li>
-          <li class="btn btn-outline-danger btn-lg" *ngIf="isUserLoggedIn" (click)="Logout()">Logout</li>
+          <li class="btn btn-outline-danger btn-lg" *ngIf="isUserLoggedIn" (click)="LogoutUser()">Logout</li>
         </ul>
       </div>
     </div>

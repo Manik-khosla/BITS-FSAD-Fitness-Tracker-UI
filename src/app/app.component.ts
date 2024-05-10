@@ -17,7 +17,7 @@ export class AppComponent {
   isUserLoggedIn: boolean = false
   LoggedInUserDetails: User = new User;
 
-  constructor(private router: Router, private loginService: LoginService, localStorage:LocalStorageService) {
+  constructor(private router: Router, private loginService: LoginService, private localStorage:LocalStorageService) {
     if(localStorage.getJWTToken()){
       this.isUserLoggedIn = true
       loginService.getLoggedInUserDetails().subscribe (userInfo => {
@@ -51,8 +51,14 @@ export class AppComponent {
     document.getElementById("navbar-toggle-btn")?.click(); 
   }
 
-  Logout() {
-
+  LogoutUser() {
+   this.loginService.logoutUser().subscribe(response => {
+    if(response.message == "Signed out successfully") {
+      this.isUserLoggedIn = false;
+      this.localStorage.DeleteJWTToken();
+      this.router.navigate(['home'])
+    }
+   })
   }
 
 }

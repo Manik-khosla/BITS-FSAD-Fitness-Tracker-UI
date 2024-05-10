@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit{
   console.log("password:"+ password);
   this.loginService.loginUser(userEmail,password).subscribe(
     res=> {
-      if(res.access_token) {
-        this.access_token = res.access_token
+      if(res.body.access_token) {
+        this.access_token = res.body.access_token
         console.log("Access token Received -" + this.access_token)
         this.localStorage.setJWTToken(this.access_token)
         this.loginService.updateLoginStatus()

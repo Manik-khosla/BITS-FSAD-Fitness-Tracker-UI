@@ -16,4 +16,8 @@ export class LocalStorageService {
   getJWTToken() {
   return localStorage.getItem('FitnessTrackerAuth')
   }
+
+  DeleteJWTToken() {
+    localStorage.removeItem('FitnessTrackerAuth')
+  }
 }

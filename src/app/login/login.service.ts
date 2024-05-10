@@ -15,7 +15,7 @@ export class LoginService {
 
   loginUser(userEmail: string, password: string) {
     var creds = { "email": userEmail, "password": password }
-    return this.http.post<any>(URLGenerator.LoginURL, creds, { responseType: 'json', observe: 'body' })
+    return this.http.post<any>(URLGenerator.LoginURL, creds, { responseType: 'json', observe: 'response', withCredentials: true  })
   }
    
   setAccessToken(token:string) {
@@ -32,5 +32,9 @@ export class LoginService {
 
   getLoggedInUserDetails() {
     return this.http.get<any>(URLGenerator.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.localStorage.getJWTToken()}, responseType: 'json', observe: 'body'})
+   }
+
+   logoutUser() {
+    return this.http.delete<any>(URLGenerator.LogoutURL, {headers : {'Authorization': 'Bearer ' + this.localStorage.getJWTToken()}, responseType: 'json', observe: 'body',  withCredentials: true })
    }
 }

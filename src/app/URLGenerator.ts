@@ -8,4 +8,7 @@ static GetUserDetailsURL = URLGenerator.BaseURL + "api/v1/sessions/"
 
 // signup
 static SignupURL = URLGenerator.BaseURL + "api/v1/sessions/sign_up"
+
+//Logout
+static LogoutURL=URLGenerator.BaseURL + "api/v1/sessions/sign_out"
 }
