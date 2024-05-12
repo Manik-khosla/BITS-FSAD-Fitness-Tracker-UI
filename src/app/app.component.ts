@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import { User } from './signup/user';
@@ -22,6 +22,7 @@ export class AppComponent {
       this.isUserLoggedIn = true
       loginService.getLoggedInUserDetails().subscribe (userInfo => {
         this.LoggedInUserDetails.firstname = userInfo.user.first_name
+       this.LoggedInUserDetails.id = userInfo.user.id
         this.router.navigate(['../dashboard']);
       })
     }else{
@@ -30,20 +31,21 @@ export class AppComponent {
     console.log("In App component set Property isUserLoggedIn " + this.isUserLoggedIn)
     loginService.getLoggedInUserDetails().subscribe (userInfo => {
       this.LoggedInUserDetails.firstname = userInfo.user.first_name
+      this.LoggedInUserDetails.id = userInfo.user.id
       this.router.navigate(['dashboard']);
     })
   
     })
   }
 }
-  ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
-  }
 
   Login() {
     this.router.navigate(['login']);
     document.getElementById("navbar-toggle-btn")?.click();
-    
+  }
+
+   GetUserDetails() {
+    return this.LoggedInUserDetails;
   }
 
   SignupNewUser() {

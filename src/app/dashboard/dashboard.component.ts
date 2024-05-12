@@ -1,13 +1,14 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivityComponent } from '../activity/activity.component';
 import { LocalStorageService } from '../session/local-storage.service';
 import { Router } from '@angular/router';
+import { NutritionTrackingComponent } from '../nutrition-tracking/nutrition-tracking.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,ActivityComponent],
+  imports: [CommonModule,ActivityComponent, NutritionTrackingComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
