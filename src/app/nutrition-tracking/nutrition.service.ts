@@ -28,8 +28,7 @@ export class NutritionService {
 
 
   GetNutritionDietPlan(user: User) {
-    const params = new HttpParams().set('id', user.id)
-    return this.http.get<any>(URLGenerator.GetNutritionData, { responseType: 'json', observe: 'response',  params})
+    return this.http.get<any>(URLGenerator.GetNutritionData+ user.id, { responseType: 'json', observe: 'response'})
   }
 
 

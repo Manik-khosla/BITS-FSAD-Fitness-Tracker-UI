@@ -30,8 +30,8 @@ export class LoginService {
     return this.isLoginSuccess$.asObservable();
   }
 
-  getLoggedInUserDetails() {
-    return this.http.get<any>(URLGenerator.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.localStorage.getJWTToken()}, responseType: 'json', observe: 'body'})
+  async getLoggedInUserDetails() {
+    return await this.http.get<any>(URLGenerator.GetUserDetailsURL,{headers : {'Authorization': 'Bearer ' + this.localStorage.getJWTToken()}, responseType: 'json', observe: 'body'}).toPromise()
    }
 
    logoutUser() {

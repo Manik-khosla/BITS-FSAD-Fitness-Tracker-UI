@@ -40,15 +40,18 @@ export class NutritionTrackingComponent {
 
   constructor(private nutritionService: NutritionService, private appComponent: AppComponent) { }
 
-  ngOnInit() {
+   async ngOnInit() {
 
-   this.nutritionService.GetNutritionDietPlan(this.appComponent.GetUserDetails()).subscribe(response => {
-    
+   this.nutritionService.GetNutritionDietPlan(await this.appComponent.GetUserDetails()).subscribe(response => {
+    if(response.body.data) {
+      this.NutritionAdded = response.body.data; 
+      this.calculateNutritionalIntakeAndUpdateProgress()
+    }
    })
     }
 
-  AddNutritonToDietPlan(nutrition: NutritionData) {
-    this.nutritionService.AddNutritionToDietPlan(nutrition, this.appComponent.GetUserDetails()).subscribe(response => {
+  async AddNutritonToDietPlan(nutrition: NutritionData) {
+    this.nutritionService.AddNutritionToDietPlan(nutrition, await this.appComponent.GetUserDetails()).subscribe(response => {
       if (response.body.message) {
         this.NutritionAdded = response.body.response;    
         this.calculateNutritionalIntakeAndUpdateProgress()
